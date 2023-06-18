@@ -209,9 +209,33 @@ float *readMatrixFromFile(const char *filename, int *rows, int *columns) {
 }
 
 int main() {
-
   int rows1, columns1, rows2, columns2;
   float determined;
+
+  int option;
+  printf("Enter 1 to read a matrix from file or any other number to continue: ");
+  scanf("%d", &option);
+
+  if (option == 1) {
+    int rows, columns;
+    float *matrix = readMatrixFromFile("matrici.txt", &rows, &columns);
+
+    if (matrix == NULL) {
+      printf("Failed to read matrix from file.\n");
+      return 0;
+    }
+
+    printf("Matrix read from file:\n");
+    for (int i = 0; i < rows; i++) {
+      for (int j = 0; j < columns; j++) {
+        printf("%.2f ", matrix[i * columns + j]);
+      }
+      printf("\n");
+    }
+
+    free(matrix);
+    return 0;
+  }
 
   printf("Enter the number of rows and columns of the first matrix: ");
   scanf("%d %d", &rows1, &columns1);
